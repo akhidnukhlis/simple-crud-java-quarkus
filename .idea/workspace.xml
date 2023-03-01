@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d44b5ee2-b691-4aa6-beab-8bfaab94e155" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/akhid/development/service/CakeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/akhid/development/service/CakeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../simple-crud/.dockerignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../simple-crud/.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../simple-crud/.idea/encodings.xml" beforeDir="false" />

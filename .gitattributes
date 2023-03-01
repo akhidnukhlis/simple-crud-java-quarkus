@@ -1,1 +1,2 @@
-*.j linguist-language=Java
+*.* linguist-language=Java
+*.html linguist-detectable=false

@@ -27,8 +27,8 @@ public class Cake extends PanacheEntityBase {
     @Column(name = "image", length = 255)
     public String image;
 
-    @Column(name = "activated")
-    public boolean activated;
+    @Column(name = "active")
+    public boolean active;
 
     @Column(name = "created_at")
     public Timestamp createdAt;

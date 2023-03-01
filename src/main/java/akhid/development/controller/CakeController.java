@@ -25,21 +25,26 @@ public class CakeController {
         Map<String, Object> result = new HashMap<>();
 
         try {
-            // insert to database
-            // payload = cakeService.submit(dto);
+            Map<String, Object> payload = cakeService.submit(dto);
 
             result.put("statusCode", 201);
-            result.put("data", cakeService.submit(dto));
-            return  Response.ok(result).build();
+            result.put("data", payload);
+            return Response.status(Response.Status.CREATED)
+                    .entity(result)
+                    .build();
         } catch (ValidationException ex) {
             result.put("statusCode", 300);
             result.put("message", ex.getMessage());
-            return Response.ok().entity(result).build();
+            return Response.ok()
+                    .entity(result)
+                    .build();
         } catch (Exception ex) {
             ex.printStackTrace();
             result.put("statusCode", 500);
             result.put("message", "INTERNAL_SERVER_ERROR");
-            return Response.serverError().entity(result).build();
+            return Response.serverError()
+                    .entity(result)
+                    .build();
         }
 
     }

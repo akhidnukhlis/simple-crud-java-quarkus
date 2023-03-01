@@ -13,6 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,23 +25,28 @@ public class CakeService {
     @Inject
     EntityManager em;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
     public Map<String, Object> submit(CakeRequestDto dto) {
-        LOG.info("service cake");
         
         String uuid = UUID.randomUUID().toString().replace("-", "");
+        Timestamp ldt = new Timestamp(new Date().getTime());
 
-        String cakeId = insertData(dto, uuid);
+        // store to database
+        insertData(dto, uuid, ldt);
 
         Map<String, Object> result = new HashMap<>();
-        result.put("id", cakeId);
+        result.put("id", uuid);
+        result.put("tittle", dto.tittle);
+        result.put("description", dto.description);
+        result.put("image", dto.image);
+        result.put("created_at", sdf.format(ldt));
+
         return result;
     }
 
     @Transactional
-    public String insertData(CakeRequestDto dto, String uuid) {
-        LOG.info("persist cake");
+    public void insertData(CakeRequestDto dto, String uuid, Timestamp ldt) {
 
         Cake cake = new Cake();
         cake.id = uuid;
@@ -48,11 +54,9 @@ public class CakeService {
         cake.description = dto.description;
         cake.rating = dto.rating;
         cake.image = dto.image;
-        cake.activated = true;
-        cake.createdAt =  new Timestamp(new Date().getTime());
-        cake.updatedAt =  new Timestamp(new Date().getTime());
+        cake.active = true;
+        cake.createdAt =  ldt;
         cake.persist();
 
-        return cake.id;
     }
 }

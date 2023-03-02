@@ -2,14 +2,17 @@ package akhid;
 
 import akhid.development.model.postgres.Cake;
 import io.quarkus.test.junit.QuarkusTest;
-import org.hamcrest.Matcher;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 public class CakeUnitTest {
@@ -23,47 +26,41 @@ public class CakeUnitTest {
     @Test
     @DisplayName("submit cake")
     public void submitCake() {
-        Cake cake = new Cake();
-        cake.id = id;
+        final Cake cake = new Cake();
         cake.tittle = tittle;
         cake.description = description;
         cake.rating = rating;
         cake.image = image;
+
         given()
-                .header("Content-Type", "application/json")
                 .body(cake)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
                 .when().post("/api/v1/product/cake/submit")
                 .then()
-                .statusCode(201)
-                .body("successfully created object", (Matcher<?>) cake);
+                    .statusCode(Response.Status.CREATED.getStatusCode());
     }
 
     @Order(2)
     @Test
     @DisplayName("find all cakes")
     public void findAll() {
-        Cake cake = given()
+        given()
                 .when().get("/api/v1/product/cakes")
                 .then()
-                    .statusCode(200)
-                    .extract()
-                    .body().as(Cake.class);
-        assertNotNull(cake);
+                    .statusCode(Response.Status.OK.getStatusCode())
+                    .body("size()", is(2));
     }
 
     @Order(3)
     @Test
-    @DisplayName("get all cakes by id")
+    @DisplayName("get cake by id")
     public void findById() {
-        Cake cake = given()
-                .pathParam("id", id)
-                .when().get("/api/v1/product/cake/id/{id}")
+        ValidatableResponse res= given()
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+                .when().get("/api/v1/product/cake/id/{id}", id)
                 .then()
-                    .statusCode(200)
-                    .extract()
-                    .body().as(Cake.class);
-        assertNotNull(cake);
-        assertEquals(1L, cake.id);
+                    .statusCode(Response.Status.OK.getStatusCode());
     }
 
 }

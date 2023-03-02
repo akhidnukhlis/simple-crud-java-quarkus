@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import akhid.development.dto.CakeRequestDto;
-import akhid.development.model.Cake;
+import akhid.development.model.postgres.Cake;
 import akhid.development.service.CakeService;
 
 import java.util.HashMap;
@@ -67,7 +67,7 @@ public class CakeController {
     @GET
     public Response findById (
             @PathParam("id")
-            @Pattern(regexp = "[0-9a-zA-Z]{32,32}", message = "Pattern not match")
+            @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid) {
         Map<String, Object> result = new HashMap<>();
 
@@ -92,7 +92,7 @@ public class CakeController {
     @PUT
     public Response updateById (
             @PathParam("id")
-            @Pattern(regexp = "[0-9a-zA-Z]{32,32}", message = "Pattern not match")
+            @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid, CakeRequestDto dto) {
         Map<String, Object> result = new HashMap<>();
 
@@ -120,7 +120,7 @@ public class CakeController {
     @DELETE
     public Response deleteById (
             @PathParam("id")
-            @Pattern(regexp = "[0-9a-zA-Z]{32,32}", message = "Pattern not match")
+            @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid) {
             Map<String, Object> result = new HashMap<>();
 

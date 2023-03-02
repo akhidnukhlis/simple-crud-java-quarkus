@@ -1,3 +1,2 @@
-akhid\GreetingResourceIT.class
-akhid\GreetingResourceTest.class
-META-INF\panache-archive.marker
+META-INF/panache-archive.marker
+akhid/CakeUnitTest.class

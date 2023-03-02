@@ -1,4 +1,4 @@
-package akhid.development.model;
+package akhid.development.model.postgres;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 

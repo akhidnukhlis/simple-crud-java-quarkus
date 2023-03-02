@@ -60,7 +60,38 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.CakeUnitTest.findById">
+  <component name="RunManager" selected="JUnit.CakeUnitTest">
+    <configuration name="CakeUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-crud" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="akhid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="akhid" />
+      <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CakeUnitTest.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-crud" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="akhid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="akhid" />
+      <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
+      <option name="METHOD_NAME" value="findAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CakeUnitTest.findById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="simple-crud" />
       <extension name="coverage">
@@ -72,6 +103,22 @@
       <option name="PACKAGE_NAME" value="akhid" />
       <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
       <option name="METHOD_NAME" value="findById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CakeUnitTest.submitCake" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-crud" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="akhid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="akhid" />
+      <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
+      <option name="METHOD_NAME" value="submitCake" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,6 +157,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CakeUnitTest.findAll" />
+        <item itemvalue="JUnit.CakeUnitTest" />
+        <item itemvalue="JUnit.CakeUnitTest.submitCake" />
         <item itemvalue="JUnit.CakeUnitTest.findById" />
       </list>
     </recent_temporary>
@@ -122,7 +172,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1677649872669</updated>
-      <workItem from="1677720459927" duration="15063000" />
+      <workItem from="1677720459927" duration="23431000" />
     </task>
     <servers />
   </component>

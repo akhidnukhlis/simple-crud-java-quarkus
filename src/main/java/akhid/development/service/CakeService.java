@@ -1,15 +1,15 @@
 package akhid.development.service;
 
 import akhid.development.dto.CakeRequestDto;
-import akhid.development.model.Cake;
+import akhid.development.model.postgres.Cake;
 import akhid.development.util.BasicUtil;
 import com.google.common.base.Strings;
-import com.oracle.svm.core.annotate.Inject;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
@@ -21,8 +21,8 @@ import java.util.*;
 @ApplicationScoped
 public class CakeService {
     private static final Logger LOG = LoggerFactory.getLogger(CakeService.class);
-    @Inject
-    EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
@@ -39,6 +39,7 @@ public class CakeService {
         result.put("id", uuid);
         result.put("tittle", dto.tittle);
         result.put("description", dto.description);
+        result.put("rating", dto.rating);
         result.put("image", dto.image);
         result.put("created_at", sdf.format(ldt));
 
@@ -47,6 +48,7 @@ public class CakeService {
     }
 
     public Map<String, Object> findById(String id) throws Exception {
+        LOG.trace("func find by id");
 
         if (Strings.isNullOrEmpty(id)) {
             throw new ValidationException("BAD_REQUEST");
@@ -60,11 +62,12 @@ public class CakeService {
                     "    c.rating AS rating,\n" +
                     "    c.image AS image,\n" +
                     "    c.active AS active,\n" +
-                    "    c.createdAt AS create_at\n" +
+                    "    c.created_at AS create_at\n" +
                     "FROM cake c\n" +
                     "WHERE c.id = :UUID"
         );
         q.setParameter("UUID", id);
+
         List result = BasicUtil.createListOfMapFromArray(
                 q.getResultList(),
                 "id", "tittle", "description", "rating", "image", "active", "create_at"
@@ -117,6 +120,7 @@ public class CakeService {
 
         Map<String, Object> result = new HashMap<>();
         result.put("id", id);
+        result.put("active", active);
         result.put("deleted_at", sdf.format(ldt));
 
         return result;

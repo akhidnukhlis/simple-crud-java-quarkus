@@ -1,11 +1,12 @@
 package akhid.development.service;
 
+import akhid.development.controller.CakeController;
 import akhid.development.dto.CakeRequestDto;
 import akhid.development.model.postgres.Cake;
 import akhid.development.util.BasicUtil;
 import com.google.common.base.Strings;
-import io.vertx.core.impl.logging.Logger;
-import io.vertx.core.impl.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -20,13 +21,14 @@ import java.util.*;
 
 @ApplicationScoped
 public class CakeService {
-    private static final Logger LOG = LoggerFactory.getLogger(CakeService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CakeService.class);
     @PersistenceContext
     private EntityManager em;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
     public Map<String, Object> submit(CakeRequestDto dto) {
+        LOGGER.info("CakeService submit: {}", dto);
 
         String uuid = UUID.randomUUID().toString();
         Timestamp ldt = new Timestamp(new Date().getTime());
@@ -48,7 +50,7 @@ public class CakeService {
     }
 
     public Map<String, Object> findById(String id) throws Exception {
-        LOG.trace("func find by id");
+        LOGGER.info("CakeService find by id: {}", id);
 
         if (Strings.isNullOrEmpty(id)) {
             throw new ValidationException("BAD_REQUEST");
@@ -78,6 +80,8 @@ public class CakeService {
     }
 
     public Map<String, Object> updateById(String id, CakeRequestDto dto) {
+        LOGGER.info("CakeService update by id: {}", id);
+
         Timestamp ldt = new Timestamp(new Date().getTime());
 
         if (Strings.isNullOrEmpty(id)) {
@@ -103,6 +107,8 @@ public class CakeService {
     }
 
     public Map<String, Object> deleteById(String id) {
+        LOGGER.info("CakeService delete by id: {}", id);
+
         Timestamp ldt = new Timestamp(new Date().getTime());
         Boolean active = false;
 

@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 import akhid.development.dto.CakeRequestDto;
 import akhid.development.model.postgres.Cake;
 import akhid.development.service.CakeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +20,16 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CakeController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CakeController.class);
     @Inject
     CakeService cakeService;
 
     @Path("/cake/submit")
     @POST
     public Response submit (CakeRequestDto dto) {
-        Map<String, Object> result = new HashMap<>();
+        LOGGER.info("Cake submit: {}", dto);
 
+        Map<String, Object> result = new HashMap<>();
         try {
             Map<String, Object> payload = cakeService.submit(dto);
 
@@ -47,8 +51,9 @@ public class CakeController {
     @Path("/cakes")
     @GET
     public Response findAll () {
-        Map<String, Object> result = new HashMap<>();
+        LOGGER.info("Cake find all");
 
+        Map<String, Object> result = new HashMap<>();
         try {
             result.put("statusCode", 200);
             result.put("data", Cake.findAll().list());
@@ -69,8 +74,9 @@ public class CakeController {
             @PathParam("id")
             @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid) {
-        Map<String, Object> result = new HashMap<>();
+        LOGGER.info("Cake find by id: {}", uuid);
 
+        Map<String, Object> result = new HashMap<>();
         try {
             result.put("statusCode", 200);
             result.put("data", cakeService.findById(uuid));
@@ -94,8 +100,9 @@ public class CakeController {
             @PathParam("id")
             @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid, CakeRequestDto dto) {
-        Map<String, Object> result = new HashMap<>();
+        LOGGER.info("Cake update by id: {}", uuid);
 
+        Map<String, Object> result = new HashMap<>();
         try {
             result.put("statusCode", 200);
             result.put("data", cakeService.updateById(uuid, dto));
@@ -122,8 +129,9 @@ public class CakeController {
             @PathParam("id")
             @Pattern(regexp = "[\\w]{8}-[\\w]{4}-[\\w]{4}-[\\w]{4}-[\\w]{12}", message = "Pattern not match")
             String uuid) {
-            Map<String, Object> result = new HashMap<>();
+        LOGGER.info("Cake delete by id: {}", uuid);
 
+        Map<String, Object> result = new HashMap<>();
         try {
             result.put("statusCode", 200);
             result.put("data", cakeService.deleteById(uuid));

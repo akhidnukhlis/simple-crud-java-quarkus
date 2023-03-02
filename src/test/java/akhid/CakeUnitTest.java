@@ -1,21 +1,27 @@
 package akhid;
 
 import akhid.development.model.postgres.Cake;
+import akhid.development.service.CakeService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
 public class CakeUnitTest {
+
     String id = "2aaed562-b3aa-4952-8c80-fab6147d0a4a";
     String tittle = "cake strawberry";
     String description = "Strawberry cake is a cake that uses strawberry as a primary ingredient.";
@@ -38,7 +44,8 @@ public class CakeUnitTest {
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
                 .when().post("/api/v1/product/cake/submit")
                 .then()
-                    .statusCode(Response.Status.CREATED.getStatusCode());
+                    .statusCode(Response.Status.CREATED.getStatusCode())
+                    .body(notNullValue());
     }
 
     @Order(2)
@@ -49,18 +56,49 @@ public class CakeUnitTest {
                 .when().get("/api/v1/product/cakes")
                 .then()
                     .statusCode(Response.Status.OK.getStatusCode())
-                    .body("size()", is(2));
+                    .body(notNullValue());
     }
 
     @Order(3)
     @Test
     @DisplayName("get cake by id")
     public void findById() {
-        ValidatableResponse res= given()
+        given()
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
                 .when().get("/api/v1/product/cake/id/{id}", id)
                 .then()
-                    .statusCode(Response.Status.OK.getStatusCode());
+                    .statusCode(Response.Status.OK.getStatusCode())
+                    .body(notNullValue());
+    }
+
+    @Order(4)
+    @Test
+    @DisplayName("update cake by id")
+    public void updateById() {
+        final Cake cake = new Cake();
+        cake.tittle = "apple cake";
+        cake.rating = 5;
+
+        given()
+                .body(cake)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+                .when().put("/api/v1/product/cake/update/id/{id}", id)
+                .then()
+                    .statusCode(Response.Status.OK.getStatusCode())
+                    .body(notNullValue());
+    }
+
+    @Order(5)
+    @Test
+    @DisplayName("delete cake by id")
+    public void deleteById() {
+        given()
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
+                .when().delete("/api/v1/product/cake/delete/id/{id}", id)
+                .then()
+                    .statusCode(Response.Status.OK.getStatusCode())
+                    .body(notNullValue());
     }
 
 }

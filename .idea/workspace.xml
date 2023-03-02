@@ -60,7 +60,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.CakeUnitTest">
+  <component name="RunManager" selected="JUnit.CakeUnitTest.updateById">
     <configuration name="CakeUnitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="simple-crud" />
       <extension name="coverage">
@@ -76,7 +76,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CakeUnitTest.findAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CakeUnitTest.deleteById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="simple-crud" />
       <extension name="coverage">
         <pattern>
@@ -86,7 +86,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="akhid" />
       <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
-      <option name="METHOD_NAME" value="findAll" />
+      <option name="METHOD_NAME" value="deleteById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -119,6 +119,22 @@
       <option name="PACKAGE_NAME" value="akhid" />
       <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
       <option name="METHOD_NAME" value="submitCake" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CakeUnitTest.updateById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="simple-crud" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="akhid.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="akhid" />
+      <option name="MAIN_CLASS_NAME" value="akhid.CakeUnitTest" />
+      <option name="METHOD_NAME" value="updateById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -157,10 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CakeUnitTest.updateById" />
+        <item itemvalue="JUnit.CakeUnitTest.deleteById" />
         <item itemvalue="JUnit.CakeUnitTest" />
-        <item itemvalue="JUnit.CakeUnitTest.findById" />
         <item itemvalue="JUnit.CakeUnitTest.submitCake" />
-        <item itemvalue="JUnit.CakeUnitTest.findAll" />
+        <item itemvalue="JUnit.CakeUnitTest.findById" />
       </list>
     </recent_temporary>
   </component>
@@ -173,7 +190,7 @@
       <option name="presentableId" value="Default" />
       <updated>1677649872669</updated>
       <workItem from="1677720459927" duration="30787000" />
-      <workItem from="1677772394162" duration="301000" />
+      <workItem from="1677772394162" duration="4693000" />
     </task>
     <servers />
   </component>

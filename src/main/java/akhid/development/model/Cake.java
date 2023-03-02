@@ -38,4 +38,5 @@ public class Cake extends PanacheEntityBase {
 
     @Column(name = "deleted_at")
     public Timestamp deletedAt;
+
 }

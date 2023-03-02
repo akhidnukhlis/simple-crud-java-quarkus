@@ -14,14 +14,14 @@ import akhid.development.service.CakeService;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/api/v1/product/cake")
+@Path("/api/v1/product")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CakeController {
     @Inject
     CakeService cakeService;
 
-    @Path("/submit")
+    @Path("/cake/submit")
     @POST
     public Response submit (CakeRequestDto dto) {
         Map<String, Object> result = new HashMap<>();
@@ -44,6 +44,7 @@ public class CakeController {
         }
     }
 
+    @Path("/cakes")
     @GET
     public Response findAll () {
         Map<String, Object> result = new HashMap<>();
@@ -62,7 +63,7 @@ public class CakeController {
         }
     }
 
-    @Path("/id/{id}")
+    @Path("/cake/id/{id}")
     @GET
     public Response findById (
             @PathParam("id")
@@ -87,7 +88,7 @@ public class CakeController {
         }
     }
 
-    @Path("/update/id/{id}")
+    @Path("/cake/update/id/{id}")
     @PUT
     public Response updateById (
             @PathParam("id")
@@ -115,7 +116,7 @@ public class CakeController {
         }
     }
 
-    @Path("/delete/id/{id}")
+    @Path("/cake/delete/id/{id}")
     @DELETE
     public Response deleteById (
             @PathParam("id")

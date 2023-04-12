@@ -1,4 +1,4 @@
-# simple-crud
+# simple-crud-java-quarkus
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
